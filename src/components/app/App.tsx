@@ -1,6 +1,8 @@
+import "./app.scss";
 function App(){
     return (
-        <main className="board"></main>
+        <main className="board">
+        </main>
     )
 }
 
