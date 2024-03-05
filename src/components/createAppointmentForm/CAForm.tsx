@@ -1,3 +1,4 @@
+import './caform.scss';
 function CAForm() {
 	return (
 		<form className="caform">
