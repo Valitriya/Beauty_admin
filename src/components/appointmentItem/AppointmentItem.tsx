@@ -1,3 +1,4 @@
+import './appointmentItem.scss';
 function AppointmentItem() {
 	return (
 		<div className="appointment">
