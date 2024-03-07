@@ -1,6 +1,8 @@
 import Calendar from "../../components/calendar/Calendar";
 import HistoryList from "../../components/historyList/HistoryList";
 
+import "./historyPage.scss";
+
 function HistoryPage(){
     return(
         <section className="history">
