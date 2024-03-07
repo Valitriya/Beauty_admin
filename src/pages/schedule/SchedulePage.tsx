@@ -2,7 +2,7 @@ import Calendar from "../../components/calendar/Calendar";
 import CAForm from "../../components/createAppointmentForm/CAForm";
 import AppointmentList from "../../components/appointmentList/AppointmentList";
 
-im
+import "./schedulePage.scss";
 function SchedulePage() {
 	return (
 		<section className="schedule">
