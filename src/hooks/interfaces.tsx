@@ -1,5 +1,5 @@
-export type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
-export interface HTTPHeaders {
+type HTTPRequestMethods = "GET" | "POST" | "PATCH" | "DELETE";
+interface HTTPHeaders {
 	[key: string]: string
 }
 export interface RequestConfig {

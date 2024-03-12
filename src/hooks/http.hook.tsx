@@ -1,17 +1,35 @@
 import { useState, useCallback } from "react";
-import {HTTPRequestMethods, HTTPHeaders, RequestConfig} from './interfaces';
-
+import { RequestConfig } from "./interfaces";
 
 export const useHttp = () => {
 	const [loadingStatus, setLoadingStatus] = useState<string>("idle");
 
 	const request = useCallback(
-		async (
-			{url,
+		async ({
+			url,
 			method = "GET",
 			body = null,
-			headers = { "Content-Type": "application/json" }}: RequestConfig
-		) => {},
-        []
+			headers = { "Content-Type": "application/json" },
+		}: RequestConfig) => {
+			setLoadingStatus("loading");
+
+			try {
+				const response = await fetch(url, { method, body, headers });
+				if (!response.ok) {
+					throw new Error(`Could not fetch ${url}, status: ${response.status}`);
+				}
+
+				const data = await response.json();
+
+				setLoadingStatus("idle");
+				return data;
+			} catch (e) {
+				setLoadingStatus("error");
+				throw e;
+			}
+		},
+		[]
 	);
+
+	return { loadingStatus, request };
 };
