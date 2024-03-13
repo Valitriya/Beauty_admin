@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { RequestConfig } from "./interfaces";
+import { RequestConfig } from "../shared/interfaces/hook.interface";
 
 export const useHttp = () => {
 	const [loadingStatus, setLoadingStatus] = useState<string>("idle");
