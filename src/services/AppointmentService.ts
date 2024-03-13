@@ -1,7 +1,10 @@
 import { useHttp } from "../hooks/http.hook";
 import hasRequiredFields from "../utils/hasRequiredFields";
 
-import { IAppointment } from "../shared/interfaces/appointment.interface";
+import {
+	IAppointment,
+	ActiveAppointment,
+} from "../shared/interfaces/appointment.interface";
 
 const requiredFields = ["id", "date", "name", "service", "phone", "canceled"];
 
@@ -20,8 +23,24 @@ const useAppointmentService = () => {
 		}
 	};
 
+	const getAllActiveAppointments = async (): Promise<ActiveAppointment[]> => {
+		const base = await getAllAppointments();
+		const transformed: ActiveAppointment[] = base.map((item) => {
+			return {
+				id: item.id,
+				date: item.date,
+				name: item.name,
+				service: item.service,
+				phone: item.phone,
+			};
+		});
+
+		return transformed;
+	};
+
 	return {
 		loadingStatus,
 		getAllAppointments,
+		getAllActiveAppointments,
 	};
 };
