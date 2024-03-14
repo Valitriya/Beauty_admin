@@ -11,15 +11,21 @@
 		color: $main-color;
 	}
 }
-
 .header {
 	&__list {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 		height: 60px;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+		&::after {
+			content: "";
+			position: absolute;
+			border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+			width: 897px;
+			top: 60px;
+		}
 	}
+
 	&__link {
 		font-weight: 700;
 		font-size: 20px;

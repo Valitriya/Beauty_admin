@@ -1,6 +1,8 @@
+@import "../../style/variables.scss";
+
 .calendar{
     width: 280px;
     height: 272px;
-    background-color: #fff;
+    background-color: $bg-color;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
 }

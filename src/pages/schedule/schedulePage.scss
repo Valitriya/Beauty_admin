@@ -4,7 +4,8 @@
 	display: grid;
 	grid-template-columns: 280px 500px;
 	column-gap: 120px;
-	padding-top: 50px;
+	padding: 50px;
+	justify-content: center;
 	&__controls {
 		display: grid;
 		grid-template-rows: 272px 370px;
