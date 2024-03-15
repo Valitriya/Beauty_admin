@@ -3,7 +3,7 @@ import {
 	ActiveAppointment,
 } from "../../shared/interfaces/appointment.interface";
 
-enum ActionsTypes {
+export enum ActionsTypes {
 	SET_ACTIVE_APPOINTMENTS = "SET_ACTIVE_APPOINTMENTS",
 	SET_ALL_APPOINTMENTS = "SET_ALL_APPOINTMENTS",
 }

@@ -1,18 +1,12 @@
 import { useEffect } from "react";
 import Header from "../header/Header";
 import SchedulePage from "../../pages/schedule/SchedulePage";
-
 import useAppointmentService from "../../services/AppointmentService";
-import {
-	IAppointment,
-	ActiveAppointment,
-} from "../../shared/interfaces/appointment.interface";
+
+import { IInitialState } from "../../context/appointments/reducer";
+
 import "./app.scss";
 
-interface IInitialState {
-	allAppointmens: IAppointment | [];
-	ActiveAppointments: ActiveAppointment | [];
-}
 const initialState: IInitialState = {
 	allAppointmens: [],
 	ActiveAppointments: [],
@@ -26,7 +20,7 @@ function App() {
 	return (
 		<main className="board">
 			<Header />
-			<SchedulePage/>
+			<SchedulePage />
 		</main>
 	);
 }
