@@ -5,7 +5,7 @@ import { ActionsTypes } from "./actions";
 import useAppointmentService from "../../services/AppointmentService";
 
 const initialState: IInitialState = {
-	allAppointmens: [],
+	allAppointments: [],
 	ActiveAppointments: [],
 };
 
@@ -13,7 +13,7 @@ interface IAppointmentContextValue extends IInitialState {
 	getAppointments: () => void;
 }
 export const AppointmentContext = createContext<IAppointmentContextValue>({
-	allAppointmens: initialState.allAppointmens,
+	allAppointments: initialState.allAppointments,
 	ActiveAppointments: initialState.ActiveAppointments,
 	getAppointments: () => {},
 });
@@ -26,7 +26,7 @@ const AppointmentsContextProvider = ({ children }: ProviderProps) => {
 		useAppointmentService();
 
 	const value: IAppointmentContextValue = {
-		allAppointmens: state.allAppointmens,
+		allAppointments: state.allAppointments,
 		ActiveAppointments: state.ActiveAppointments,
 		getAppointments: () => {
 			getAllAppointments().then((data) =>
