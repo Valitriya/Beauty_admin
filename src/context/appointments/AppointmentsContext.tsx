@@ -12,7 +12,7 @@ const initialState: IInitialState = {
 interface IAppointmentContextValue extends IInitialState {
 	getAppointments: () => void;
 }
-const appointmentContext = createContext<IAppointmentContextValue>({
+export const AppointmentContext = createContext<IAppointmentContextValue>({
 	allAppointmens: initialState.allAppointmens,
 	ActiveAppointments: initialState.ActiveAppointments,
 	getAppointments: () => {},
@@ -34,6 +34,12 @@ const AppointmentsContextProvider = ({ children }: ProviderProps) => {
 			);
 		},
 	};
+
+	return (
+		<AppointmentContext.Provider value={value}>
+			{children}
+		</AppointmentContext.Provider>
+	);
 };
 
 export default AppointmentsContextProvider;
