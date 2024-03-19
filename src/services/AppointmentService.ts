@@ -1,5 +1,6 @@
 import { useHttp } from "../hooks/http.hook";
 import hasRequiredFields from "../utils/hasRequiredFields";
+import dayjs from "dayjs";
 
 import {
 	IAppointment,
@@ -26,7 +27,9 @@ const useAppointmentService = () => {
 	const getAllActiveAppointments = async (): Promise<ActiveAppointment[]> => {
 		const base = await getAllAppointments();
 		const transformed: ActiveAppointment[] = base
-			.filter((item) => !item.canceled)
+			.filter((item) => {
+				return !item.canceled && dayjs(item.date).diff(undefined, 'minute') > 0
+			})
 			.map((item) => {
 				return {
 					id: item.id,
