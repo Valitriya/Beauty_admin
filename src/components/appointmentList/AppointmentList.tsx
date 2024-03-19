@@ -1,14 +1,18 @@
-import { useEffect, useContext} from "react";
+import { useEffect, useContext } from "react";
 import AppointmentItem from "../appointmentItem/AppointmentItem";
 import { AppointmentContext } from "../../context/appointments/AppointmentsContext";
 function AppointmentList() {
-    const {allAppointments, getAppointments} = useContext(AppointmentContext);
+	const { ActiveAppointments, getActiveAppointments } =
+		useContext(AppointmentContext);
+
+	useEffect(() => {
+		getActiveAppointments();
+	}, []);
 	return (
 		<>
-			<AppointmentItem />
-			<AppointmentItem />
-			<AppointmentItem />
-			<AppointmentItem />
+			{ActiveAppointments.map((item) => {
+				return <AppointmentItem {...item} key={item.id} />;
+			})}
 		</>
 	);
 }

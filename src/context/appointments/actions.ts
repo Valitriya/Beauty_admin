@@ -9,7 +9,7 @@ export enum ActionsTypes {
 }
 
 export type IAppointmentAction =
-	| {
+	{	
 			type: ActionsTypes.SET_ACTIVE_APPOINTMENTS;
 			payload: ActiveAppointment[];
 	  }
