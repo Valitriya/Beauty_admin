@@ -3,7 +3,7 @@ import {
 	IAppointment,
 	ActiveAppointment,
 } from "../../shared/interfaces/appointment.interface";
-import {LoadingStatusOptions} from "../../shared/interfaces/hook.interface";
+import { LoadingStatusOptions } from "../../shared/interfaces/hook.interface";
 
 export interface IAppointmentState {
 	allAppointments: IAppointment[] | [];
@@ -17,9 +17,17 @@ export default function reducer(
 ): IAppointmentState {
 	switch (action.type) {
 		case ActionsTypes.SET_ALL_APPOINTMENTS:
-			return { ...state, allAppointments: action.payload };
+			return {
+				...state,
+				allAppointments: action.payload,
+				appointmentLoadiingStatus: "idle",
+			};
 		case ActionsTypes.SET_ACTIVE_APPOINTMENTS:
-			return { ...state, ActiveAppointments: action.payload };
+			return {
+				...state,
+				ActiveAppointments: action.payload,
+				appointmentLoadiingStatus: "idle",
+			};
 		case ActionsTypes.FETCHING_APPOINTMENTS:
 			return { ...state, appointmentLoadiingStatus: "loading" };
 		case ActionsTypes.ERROR_FETCHING_APPOINTMENTS:
