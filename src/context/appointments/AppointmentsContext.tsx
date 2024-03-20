@@ -7,6 +7,7 @@ import useAppointmentService from "../../services/AppointmentService";
 const initialState: IInitialState = {
 	allAppointments: [],
 	ActiveAppointments: [],
+	appointmentLoadiingStatus: "idle",
 };
 
 interface IAppointmentContextValue extends IInitialState {
@@ -16,6 +17,7 @@ interface IAppointmentContextValue extends IInitialState {
 export const AppointmentContext = createContext<IAppointmentContextValue>({
 	allAppointments: initialState.allAppointments,
 	ActiveAppointments: initialState.ActiveAppointments,
+	appointmentLoadiingStatus: initialState.appointmentLoadiingStatus,
 	getAppointments: () => {},
 	getActiveAppointments: () => {},
 });
@@ -30,15 +32,17 @@ const AppointmentsContextProvider = ({ children }: ProviderProps) => {
 	const value: IAppointmentContextValue = {
 		allAppointments: state.allAppointments,
 		ActiveAppointments: state.ActiveAppointments,
+		appointmentLoadiingStatus: loadingStatus,
 		getAppointments: () => {
 			getAllAppointments().then((data) =>
 				dispatch({ type: ActionsTypes.SET_ALL_APPOINTMENTS, payload: data })
 			);
 		},
 		getActiveAppointments: () => {
-			getAllActiveAppointments().then((data) => 
-				dispatch({type: ActionsTypes.SET_ACTIVE_APPOINTMENTS, payload: data}))
-		}
+			getAllActiveAppointments().then((data) =>
+				dispatch({ type: ActionsTypes.SET_ACTIVE_APPOINTMENTS, payload: data })
+			);
+		},
 	};
 
 	return (
