@@ -1,16 +1,16 @@
 import React, { createContext, useReducer } from "react";
-import reducer, { IInitialState } from "./reducer";
+import reducer, { IAppointmentState } from "./reducer";
 import { ActionsTypes } from "./actions";
 
 import useAppointmentService from "../../services/AppointmentService";
 
-const initialState: IInitialState = {
+const initialState: IAppointmentState = {
 	allAppointments: [],
 	ActiveAppointments: [],
 	appointmentLoadiingStatus: "idle",
 };
 
-interface IAppointmentContextValue extends IInitialState {
+interface IAppointmentContextValue extends IAppointmentState {
 	getAppointments: () => void;
 	getActiveAppointments: () => void;
 }

@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
-import { RequestConfig } from "../shared/interfaces/hook.interface";
+import { RequestConfig, LoadingStatusOptions } from "../shared/interfaces/hook.interface";
 
 export const useHttp = () => {
-	const [loadingStatus, setLoadingStatus] = useState<string>("idle");
+	const [loadingStatus, setLoadingStatus] = useState<LoadingStatusOptions>("idle");
 
 	const request = useCallback(
 		async ({
