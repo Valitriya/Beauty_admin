@@ -13,16 +13,16 @@ function AppointmentItem({
 	const [timeLeft, changeTimeLeft] = useState<string | null>(null);
 	useEffect(() => {
 		changeTimeLeft(
-			`${dayjs(date).diff(undefined, "h")} : ${
-				dayjs(date).diff(undefined, "m") % 60
-			}`
+			`${dayjs(date).diff(undefined, "d")}д ${
+				dayjs(date).diff(undefined, "h") % 24
+			}ч : ${dayjs(date).diff(undefined, "m") % 60}м`
 		);
 
 		const intervalId = setInterval(() => {
 			changeTimeLeft(
-				`${dayjs(date).diff(undefined, "h")} : ${
-					dayjs(date).diff(undefined, "m") % 60
-				}`
+				`${dayjs(date).diff(undefined, "d")}д ${
+					dayjs(date).diff(undefined, "h") % 24
+				}ч : ${dayjs(date).diff(undefined, "m") % 60}м`
 			);
 		}, 60000);
 
