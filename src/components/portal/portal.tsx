@@ -41,3 +41,5 @@ function Portal({ children, wrapperId = "portal-wrapper" }: PortalProps) {
 
 	return createPortal(children, wrapperElement);
 }
+
+export default Portal;
