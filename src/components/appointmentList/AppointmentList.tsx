@@ -33,9 +33,9 @@ function AppointmentList() {
 	return (
 		<>
 			{ActiveAppointments.map((item) => {
-				return <AppointmentItem {...item} key={item.id} />;
+				return <AppointmentItem {...item} key={item.id} openModal={setIsOpen}/>;
 			})}
-			{isOpen ? <CancelModal /> : null}
+			{isOpen ? <CancelModal handleClose={setIsOpen}/> : null}
 		</>
 	);
 }

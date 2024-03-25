@@ -1,6 +1,10 @@
 import "./modal.scss";
 
-function CancelModal() {
+interface IModalProps {
+	handleClose: (state: boolean) => void;
+}
+
+function CancelModal({ handleClose }: IModalProps) {
 	return (
 		<div className="modal">
 			<div className="modal__body">
@@ -9,7 +13,9 @@ function CancelModal() {
 				</span>
 				<div className="modal__btns">
 					<button className="modal__ok">Ok</button>
-					<button className="modal__close">Close</button>
+					<button className="modal__close" onClick={() => handleClose(false)}>
+						Close
+					</button>
 				</div>
 				<div className="modal__status">Success</div>
 			</div>
