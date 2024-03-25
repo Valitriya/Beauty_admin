@@ -7,6 +7,7 @@ import { IAppointment } from "../../shared/interfaces/appointment.interface";
 
 type AppointmentProps = Optional<IAppointment, "canceled"> & {
 	openModal: (state: boolean) => void;
+	selectId: () => void;
 };
 
 function AppointmentItem({
@@ -17,6 +18,7 @@ function AppointmentItem({
 	phone,
 	canceled,
 	openModal,
+	selectId,
 }: AppointmentProps) {
 	const [timeLeft, changeTimeLeft] = useState<string | null>(null);
 	useEffect(() => {
@@ -57,7 +59,10 @@ function AppointmentItem({
 					</div>
 					<button
 						className="appointment__cancel"
-						onClick={() => openModal(true)}
+						onClick={() => {
+							openModal(true);
+							selectId();
+						}}
 					>
 						Cancel
 					</button>

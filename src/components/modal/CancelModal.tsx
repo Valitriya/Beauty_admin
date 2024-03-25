@@ -2,6 +2,7 @@ import "./modal.scss";
 
 interface IModalProps {
 	handleClose: (state: boolean) => void;
+	selectedId: number;
 }
 
 function CancelModal({ handleClose }: IModalProps) {
