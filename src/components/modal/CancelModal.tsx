@@ -29,9 +29,16 @@ function CancelModal({ handleClose, selectedId }: IModalProps) {
 			});
 	};
 
+	const closeModal = () => {
+		handleClose(false);
+		if (cancelStatus) {
+			getActiveAppointments();
+		}
+	};
+
 	const closeOnEscape = (e: KeyboardEvent): void => {
 		if (e.key === "Escape") {
-			handleClose(false);
+			closeModal();
 		}
 	};
 	useEffect(() => {
@@ -57,7 +64,7 @@ function CancelModal({ handleClose, selectedId }: IModalProps) {
 						>
 							Ok
 						</button>
-						<button className="modal__close" onClick={() => handleClose(false)}>
+						<button className="modal__close" onClick={() => closeModal()}>
 							Close
 						</button>
 					</div>
