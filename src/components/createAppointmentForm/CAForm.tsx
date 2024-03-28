@@ -14,17 +14,29 @@ function CAForm() {
 		id: 1,
 	});
 
+	const [creationStatus, setCreationStatus] = useState<boolean>(false);
+
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		createNewAppointment(formData);
+		setCreationStatus(true);
+		createNewAppointment(formData).then(() => {
+			setCreationStatus(false);
+			setFormDate({
+				name: "",
+				service: "",
+				phone: "",
+				date: "",
+				canceled: false,
+				id: 1,
+			});
+		});
 	};
-
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		setFormDate((prevData) => ({ 
-			...prevData, 
-			[name]: value 
+		setFormDate((prevData) => ({
+			...prevData,
+			[name]: value,
 		}));
 	};
 	return (
@@ -82,7 +94,7 @@ function CAForm() {
 				value={formData.date}
 				onChange={handleChange}
 			/>
-			<button>Create</button>
+			<button disabled={creationStatus}>Create</button>
 		</form>
 	);
 }
