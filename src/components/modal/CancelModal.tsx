@@ -39,6 +39,7 @@ function CancelModal({ handleClose, selectedId }: IModalProps) {
 	const closeOnEscape = (e: KeyboardEvent): void => {
 		if (e.key === "Escape") {
 			closeModal();
+			getActiveAppointments();
 		}
 	};
 	useEffect(() => {
