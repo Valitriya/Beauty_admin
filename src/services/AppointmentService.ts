@@ -28,7 +28,7 @@ const useAppointmentService = () => {
 		const base = await getAllAppointments();
 		const transformed: ActiveAppointment[] = base
 			.filter((item) => {
-				return !item.canceled && dayjs(item.date).diff(undefined, 'minute') > 0
+				return !item.canceled && dayjs(item.date).diff(undefined, "minute") > 0;
 			})
 			.map((item) => {
 				return {
@@ -43,18 +43,29 @@ const useAppointmentService = () => {
 		return transformed;
 	};
 
-	const cancelOneAppointment = async(id: number) => {
+	const cancelOneAppointment = async (id: number) => {
 		return await request({
 			url: `${_apiBase}/${id}`,
-			method: 'PATCH',
-			body: JSON.stringify({canceled: true}),
-		})
-	}
+			method: "PATCH",
+			body: JSON.stringify({ canceled: true }),
+		});
+	};
+
+	const createNewAppointment = async (body: IAppointment) => {
+		const id = new Date().getTime();
+		body["id"] = id;
+		return await request({
+			url: _apiBase,
+			method: "POST",
+			body: JSON.stringify(body),
+		});
+	};
 	return {
 		loadingStatus,
 		getAllAppointments,
 		getAllActiveAppointments,
 		cancelOneAppointment,
+		createNewAppointment,
 	};
 };
 
