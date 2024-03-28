@@ -7,6 +7,7 @@ import { IAppointment } from "../../shared/interfaces/appointment.interface";
 
 type AppointmentProps = Optional<IAppointment, "canceled"> & {
 	openModal: (state: number) => void;
+	getActiveAppointments?: () => void;
 };
 const AppointmentItem = memo(
 	({
@@ -17,6 +18,7 @@ const AppointmentItem = memo(
 		phone,
 		canceled,
 		openModal,
+		getActiveAppointments,
 	}: AppointmentProps) => {
 		const [timeLeft, changeTimeLeft] = useState<string | null>(null);
 		useEffect(() => {
@@ -27,11 +29,18 @@ const AppointmentItem = memo(
 			);
 
 			const intervalId = setInterval(() => {
-				changeTimeLeft(
-					`${dayjs(date).diff(undefined, "d")}д ${
-						dayjs(date).diff(undefined, "h") % 24
-					}ч : ${dayjs(date).diff(undefined, "m") % 60}м`
-				);
+				if (dayjs(date).diff(undefined, "m") <= 0) {
+					if (getActiveAppointments) {
+						getActiveAppointments();
+					}
+					clearInterval(intervalId);
+				} else {
+					changeTimeLeft(
+						`${dayjs(date).diff(undefined, "d")}д ${
+							dayjs(date).diff(undefined, "h") % 24
+						}ч : ${dayjs(date).diff(undefined, "m") % 60}м`
+					);
+				}
 			}, 60000);
 
 			return () => {
