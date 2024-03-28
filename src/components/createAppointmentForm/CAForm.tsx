@@ -1,7 +1,34 @@
-import './caform.scss';
+import useAppointmentService from "../../services/AppointmentService";
+import { FormEvent, useState, ChangeEvent } from "react";
+import { IAppointment } from "../../shared/interfaces/appointment.interface";
+
+import "./caform.scss";
 function CAForm() {
+	const { createNewAppointment } = useAppointmentService();
+	const [formData, setFormDate] = useState<IAppointment>({
+		name: "",
+		service: "",
+		phone: "",
+		date: "",
+		canceled: false,
+		id: 1,
+	});
+
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		createNewAppointment(formData);
+	};
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+
+		setFormDate((prevData) => ({ 
+			...prevData, 
+			[name]: value 
+		}));
+	};
 	return (
-		<form className="caform">
+		<form className="caform" onSubmit={handleSubmit}>
 			<div className="caform__title">Create new appointment</div>
 			<label htmlFor="name">
 				Name<span>*</span>
@@ -12,6 +39,8 @@ function CAForm() {
 				id="name"
 				placeholder="User name"
 				required
+				value={formData.name}
+				onChange={handleChange}
 			/>
 			<label htmlFor="service">
 				Service<span>*</span>
@@ -22,6 +51,8 @@ function CAForm() {
 				id="service"
 				placeholder="service name"
 				required
+				value={formData.service}
+				onChange={handleChange}
 			/>
 			<label htmlFor="phone">
 				Phone number<span>*</span>
@@ -30,10 +61,12 @@ function CAForm() {
 				type="tel"
 				name="phone"
 				id="phone"
-				placeholder="+1 890 335 372"
-				pattern="^\++[0-9]{1} [0-9]{3} [0-9]{3} [0-9]{3}"
-				title="Format should be +1 804 944 567"
+				placeholder="+7 999 999 99 99"
+				pattern="^\++[0-9]{1} [0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"
+				title="Format should be +7 999 999 99 99"
 				required
+				value={formData.phone}
+				onChange={handleChange}
 			/>
 			<label htmlFor="date">
 				Date<span>*</span>
@@ -46,6 +79,8 @@ function CAForm() {
 				pattern="^\d{2}\/\d{2}\/\d{4} \d{2}:\d{2}$"
 				title="Format should be DD/MM/YYYY HH:mm"
 				required
+				value={formData.date}
+				onChange={handleChange}
 			/>
 			<button>Create</button>
 		</form>
